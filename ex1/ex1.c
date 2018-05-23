@@ -9,6 +9,22 @@
 int main(int argc, char *argv[])
 {
     // Your code here
+    int x = 100;
+    int rc = fork();
 
-    return 0;
+    if (rc < 0)
+    {
+        fprintf(stderr, "Child process has failed miserably.\n");
+        exit(1);
+    }
+    else if (rc == 0)
+    {
+        printf("Child (pid %d), x= %d\n", (int)getpid(), x);
+        x = 42;
+        printf("Child (pid %d), x = %d\n", (int)getpid(), x);
+    }
+    else
+    {
+        printf("Parent (pid %d) of child, x = %d\n", (int)getpid(), x);
+    }
 }
